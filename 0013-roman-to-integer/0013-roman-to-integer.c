@@ -1,55 +1,24 @@
-int romanToInt(char* s) {
-    int result = 0, i = 0, len = 0;
-    while (s[i] != '\0') {
-        len++;
-        i++;
-    }
-    for (i = len - 1; i >= 0; i--) {
-        if (s[i] == 'I') {
-            result = result + 1;
-        } else if (s[i] == 'V') {
-            if (i > 0 && s[i - 1] == 'I') {
-                result = result + 4;
-                i = i - 1;
-            } else {
-                result = result + 5;
-            }
-        } else if (s[i] == 'X') {
-            if (i > 0 && s[i - 1] == 'I') {
-                result = result + 9;
-                i = i - 1;
-            } else {
-                result = result + 10;
-            }
-        } else if (s[i] == 'L') {
-            if (i > 0 && s[i - 1] == 'X') {
-                result = result + 40;
-                i = i - 1;
-            } else {
-                result = result + 50;
-            }
-        } else if (s[i] == 'C') {
-            if (i > 0 && s[i - 1] == 'X') {
-                result = result + 90;
-                i = i - 1;
-            } else {
-                result = result + 100;
-            }
-        } else if (s[i] == 'D') {
-            if (i > 0 && s[i - 1] == 'C') {
-                result = result + 400;
-                i = i - 1;
-            } else {
-                result = result + 500;
-            }
-        } else if (s[i] == 'M') {
-            if (i > 0 && s[i - 1] == 'C') {
-                result = result + 900;
-                i = i - 1;
-            } else {
-                result = result + 1000;
-            }
-        }
-    }
-    return result;
+int value(char c){
+	if(c=='I') return 1;
+	if(c=='V') return 5;
+	if(c=='X') return 10;
+	if(c=='L') return 50;
+	if(c=='C') return 100;
+	if(c=='D') return 500;
+	if(c=='M') return 1000;
+	return 0;
+}
+int romanToInt(char* s){
+	int i=0;
+	int result=0;
+	while(s[i]!='\0'){
+		if(value(s[i]) < value(s[i+1])){
+			result=result-value(s[i]);
+		}
+		else{
+			result=result+value(s[i]);
+		}
+    i++;
+	}
+return result;
 }
